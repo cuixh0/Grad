@@ -1,0 +1,2 @@
+version,device name,recording epoch time,recording time,recording timezone,platform,appVersion,device id,sensors,sampleRateMs
+3,iPhone 12,1704279015314,2024-01-03_10-50-15,Asia/Shanghai,ios,1.27.1,e771dc7f-3d67-4fcb-8c1d-a95e5e718bdb,Accelerometer|Annotation|AccelerometerUncalibrated,10||10
