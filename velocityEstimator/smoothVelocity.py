@@ -33,14 +33,13 @@ class RealTimeVelocityPlot:
 
 
 
-
 if __name__ == "__main__":
     velocityPlot = RealTimeVelocityPlot()
-    df = pd.read_csv('/Users/cui/workspace/GradProj/velocityEstimator/noCumulativeErrorVelocityData.csv')
+    df = pd.read_csv('./noCumulativeErrorVelocityData.csv')
     
     # 提取列数据
-    seconds_elapsed = df['seconds_elapsed']
-    velocities_y = df['velocities_y']
+    seconds_elapsed = df['time']
+    velocities_y1 = df['velocities_y1']
 
     # 默认初始值
     smoothV, a = 2, 0
@@ -50,11 +49,11 @@ if __name__ == "__main__":
 
     flag = 0
 
-    for i in range(len(velocities_y) - 1):
-        velocityPlot.update_plot(seconds_elapsed[i], velocities_y[i], smoothV)
-        curdis += velocities_y[i] * (seconds_elapsed[i + 1] - seconds_elapsed[i])
-        maxV = max(maxV, velocities_y[i])
-        if velocities_y[i] == 0:
+    for i in range(1, len(velocities_y1) - 1):
+        velocityPlot.update_plot(seconds_elapsed[i], velocities_y1[i], smoothV)
+        curdis += velocities_y1[i] * (seconds_elapsed[i + 1] - seconds_elapsed[i])
+        maxV = max(maxV, velocities_y1[i])
+        if velocities_y1[i] < velocities_y1[i - 1] and velocities_y1[i] < velocities_y1[i + 1]:
             if dis != 0:
                 dis = (dis + curdis) / 2
             else:
@@ -77,21 +76,9 @@ if __name__ == "__main__":
             
         flag += 1
         plt.pause(0.05)  # 暂停一段时间，模拟实时更新
-        if flag == 1:
-            time.sleep(10)
+
     plt.ioff()
     plt.show()
-
-
-
-
-
-
-
-
-
-
-
 
 
 
